@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{% if error %}
+    <h2>Ошибка! Тебе еще рано получать паспорт! Приходи, когда исполнится 14 лет!</h2>
+{% endif %}
+<form method=post>
+    <input type="text" placeholder="Введите Ваше имя" name="name"><br>
+    <input type="text" placeholder="Введите Ваш e-mail" name="mail"><br>
+    <input type="submit" value="Отправить">
+</form>
+</body>
+</html>

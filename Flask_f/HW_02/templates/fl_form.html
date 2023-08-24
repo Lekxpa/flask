@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="mt-2" method="post">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="mb-2 col-5">
+                            <p class="text-{{ category }} lead">{{ message }}</p>
+<!--                            <a href="/" class="btn btn-outline-dark">Перейти на главную</a>-->
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+<!--            <div class="mb-3 col-5">-->
+<!--                <label for="exampleFormControlInput1" class="form-label">Имя</label>-->
+<!--                <input type="text" class="form-control" name="name" id="exampleFormControlInput1"-->
+<!--                       placeholder="Введите имя">-->
+<!--            </div>-->
+<!--            <div class="col-auto">-->
+<!--                <button type="submit" class="btn btn-primary mb-2">Отправить</button>-->
+<!--            </div>-->
+            <input type="text" placeholder="Введите имя" name="name"><br>
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+{% endblock %}
