@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="shellPath" value="D:\Python\Flask\newproject\seminar03\instance\university.db" />
+  </component>
+</project>

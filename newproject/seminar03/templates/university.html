@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+University
+{% endblock %}
+
+{% block content %}
+    <h1>List of students</h1>
+    <div class="row">
+        {% for item in university %}
+            <p class="col-12 col-md-6">Name: {{ item.first_name }} {{ item.last_name }}<br>Age: {{ item.age }}<br>
+                Gender: {{ item.gender }}<br>Group: {{ item.group }}<br>Faculty Id: {{ item.faculty_id }}
+                <br>Faculty: {{ item.faculty.name }}
+            </p>
+        {% endfor %}
+    </div>
+{% endblock %}
