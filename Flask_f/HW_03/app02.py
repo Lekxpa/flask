@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
-from flask-wtf import CSRFProtect
+from flask_wtf import CSRFProtect
 import secrets
 from werkzeug.security import generate_password_hash
 
@@ -31,7 +31,7 @@ def new_reg():
         user = User(username=name, userlastname=last_name, email=email, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('success-reg', name=name))
+        return redirect(url_for('success_reg', name=name))
     return render_template('new_reg.html', form=form)
 
 
@@ -43,7 +43,7 @@ def success_reg(name):
 @app.cli.command("init-db")
 def init_db():
     db.create_all()
-    print('Ok new-reg')
+    print('Ok new_reg')
 
 
 if __name__ == '__main__':
