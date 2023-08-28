@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+univer
+{% endblock %}
+
+{% block content %}
+    <h2>List</h2>
+    <div class="row">
+        {% for item in univer %}
+            <p class="col-12 col-md-6">Id: {{ item.student_id }}<br>Student: {{ item.student.first_name }}
+                {{ item.student.last_name }}<br>Group: {{ item.student.group }}<br>
+            Email: {{ item.student.email }}<br>Subject: {{ item.name_of_subject }}<br>Marks: {{ item.mark }}
+        {% endfor %}
+    </div>
+{% endblock %}
