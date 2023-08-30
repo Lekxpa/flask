@@ -12,11 +12,10 @@ import time
 
 arr = [randint(1, 100) for _ in range(1000000)]
 start_time = time.time()
-result = 0
 
 
 async def sum_elem_arr(arr):
-    global result
+    result = 0
     for i in arr:
         result += i
     print(f'Сумма: {result}')
