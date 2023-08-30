@@ -1,3 +1,4 @@
+import wtf as wtf
 from flask import Flask, request, render_template, redirect, url_for
 from flask-wtf import CSRFProtect
 import secrets

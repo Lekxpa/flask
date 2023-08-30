@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from flask import Flask, render_template, jsonify
 from models05 import db, User, Post, Comment
 
@@ -38,6 +40,17 @@ def get_posts_by_author(user_id):
     else:
         return jsonify({'error': 'Post not found'}), 404
 
+
+@app.route('/posts/last-week/')
+def get_posts_last_week():
+    date = datetime.utcnow() - timedelta(days=7)
+    posts = Post.query.filter(Post.created_at >= date).all()
+    if posts:
+        return jsonify([{'id': post.id, 'title': post.title,
+            'content': post.content, 'created_at': post.created_at} for post
+            in posts])
+    else:
+        return jsonify({'error': 'Posts not found'})
 
 if __name__ == '__main__':
     app.run(debug=True)
