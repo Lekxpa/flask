@@ -60,7 +60,6 @@ orders = sqlalchemy.Table("orders",metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("user_id", sqlalchemy.ForeignKey('users.id')),
     sqlalchemy.Column("product_id", sqlalchemy.ForeignKey('products.id')),
-    # sqlalchemy.Column("date_order", sqlalchemy.DateTime()),
     sqlalchemy.Column("date_order", sqlalchemy.String(30)),
     sqlalchemy.Column("status_order", sqlalchemy.String(20)),
 )
@@ -160,7 +159,7 @@ async def update_order(new_order: OrderIn, order_id: int):
     return {**new_order.model_dump(), "id": order_id}
 
 
-@app.delete('/delete_order{order_id}')
+@app.delete('/delete_order/{order_id}')
 async def delete_order(order_id: int):
     query = orders.delete().where(orders.c.id == order_id)
     await database.execute(query)
