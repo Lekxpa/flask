@@ -129,41 +129,6 @@ async def create_note(count: int):
         await database.execute(query)
     return {'message': f'{count} fake products created'}
 
-async def check_order(order_id: int):
-    query = orders.select().where(orders.c.id == order_id)
-    return await database.fetch_one(query)
-
-@app.get('/orders/', response_model=List[Order])
-async def read_orders():
-    query = orders.select()
-    return await database.fetch_all(query)
-
-
-@app.get('/orders/{order_id}', response_model=Order)
-async def read_order(order_id: int):
-    query = orders.select().where(orders.c.id == order_id)
-    return await database.fetch_one(query)
-
-
-@app.post('/add_orders/', response_model=Order)
-async def add_order(order: OrderIn):
-    query = orders.insert().values(**order.model_dump())
-    last_record_id = await database.execute(query)
-    return {**order.model_dump(), "id": last_record_id}
-
-
-@app.put('/update_order/{order_id}', response_model=Order)
-async def update_order(new_order: OrderIn, order_id: int):
-    query = orders.update().where(orders.c.id == order_id).values(**new_order.model_dump())
-    await database.execute(query)
-    return {**new_order.model_dump(), "id": order_id}
-
-
-@app.delete('/delete_order/{order_id}')
-async def delete_order(order_id: int):
-    query = orders.delete().where(orders.c.id == order_id)
-    await database.execute(query)
-    return {"message": "order deleted"}
 
 
 @app.get('/products/', response_model=List[Product])
@@ -228,15 +193,51 @@ async def update_user(new_user: UserIn, user_id: int):
     return {**new_user.model_dump(), "id": user_id}
 
 
-@app.delete('/users/{user_id}')
+@app.delete('/delete_users/{user_id}')
 async def delete_user(user_id: int):
     query = users.delete().where(users.c.id == user_id)
     await database.execute(query)
     return {"message": "user deleted"}
 
 
+async def check_order(order_id: int):
+    query = orders.select().where(orders.c.id == order_id)
+    return await database.fetch_one(query)
+
+@app.get('/orders/', response_model=List[Order])
+async def read_orders():
+    query = orders.select()
+    return await database.fetch_all(query)
+
+
+@app.get('/orders/{order_id}', response_model=Order)
+async def read_order(order_id: int):
+    query = orders.select().where(orders.c.id == order_id)
+    return await database.fetch_one(query)
+
+
+@app.post('/add_orders/', response_model=Order)
+async def add_order(order: OrderIn):
+    query = orders.insert().values(**order.model_dump())
+    last_record_id = await database.execute(query)
+    return {**order.model_dump(), "id": last_record_id}
+
+
+@app.put('/update_order/{order_id}', response_model=Order)
+async def update_order(new_order: OrderIn, order_id: int):
+    query = orders.update().where(orders.c.id == order_id).values(**new_order.model_dump())
+    await database.execute(query)
+    return {**new_order.model_dump(), "id": order_id}
+
+
+@app.delete('/delete_order/{order_id}')
+async def delete_order(order_id: int):
+    query = orders.delete().where(orders.c.id == order_id)
+    await database.execute(query)
+    return {"message": "order deleted"}
+
+
 # if __name__ == '__main__':
 #     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
 
 # uvicorn HW_06.main:app --reload
-
